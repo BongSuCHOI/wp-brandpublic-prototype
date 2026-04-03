@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // GSAP가 로드될 때까지 대기
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        // GSAP 미로드 시: 모든 fade-up 요소를 바로 표시
+        document.querySelectorAll('.fade-up').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+        initNav();
+        initCountUp();
+        initFAQ();
+        return;
+    }
+    
+    gsap.registerPlugin(ScrollTrigger);
     initNav();
     initScrollAnimations();
     initCountUp();
@@ -9,9 +23,8 @@ function initNav() {
     const nav = document.getElementById('nav');
     const toggle = document.getElementById('navToggle');
     const menu = document.getElementById('navMenu');
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    if (!nav || !toggle || !menu) return;
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
     toggle.addEventListener('click', () => {
         toggle.classList.toggle('active');
         menu.classList.toggle('active');
@@ -25,84 +38,70 @@ function initNav() {
 }
 
 function initScrollAnimations() {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const excludeSelectors = '.service-card, .diff-card, .review-card, .process-step, .faq-item, .stat-card, .pain-card, .about-feature';
-    const fadeElements = document.querySelectorAll('.fade-up:not(' + excludeSelectors + ')');
-    
-    fadeElements.forEach((el) => {
-        gsap.to(el, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 88%',
-                toggleActions: 'play none none none'
+    // 개별 fade-up 요소 (카드 그룹 제외)
+    const exclude = '.service-card, .diff-card, .review-card, .process-step, .faq-item, .stat-card, .pain-card, .about-feature';
+    document.querySelectorAll('.fade-up:not(' + exclude + ')').forEach(el => {
+        gsap.fromTo(el,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1, y: 0,
+                duration: 0.7,
+                ease: 'power2.out',
+                scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
             }
-        });
+        );
     });
 
-    const cardGroups = [
-        { selector: '.pain-card', trigger: '.pain-grid' },
-        { selector: '.stat-card', trigger: '.stats-grid' },
-        { selector: '.service-card', trigger: '.services-grid' },
-        { selector: '.diff-card', trigger: '.diff-grid' },
-        { selector: '.review-card', trigger: '.reviews-grid' },
-        { selector: '.process-step', trigger: '.process-grid' },
-        { selector: '.faq-item', trigger: '.faq-list' },
-        { selector: '.about-feature', trigger: '.about-features' }
-    ];
-
-    cardGroups.forEach(({ selector, trigger }) => {
-        const cards = document.querySelectorAll(selector);
-        if (cards.length) {
-            gsap.fromTo(cards, 
-                { opacity: 0, y: 30 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    stagger: 0.08,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: trigger,
-                        start: 'top 82%',
-                        toggleActions: 'play none none none'
+    // 카드 그룹 stagger
+    [
+        { sel: '.pain-card', trig: '.pain-grid' },
+        { sel: '.stat-card', trig: '.stats-grid' },
+        { sel: '.service-card', trig: '.services-grid' },
+        { sel: '.diff-card', trig: '.diff-grid' },
+        { sel: '.review-card', trig: '.reviews-grid' },
+        { sel: '.process-step', trig: '.process-grid' },
+        { sel: '.faq-item', trig: '.faq-list' },
+        { sel: '.about-feature', trig: '.about-features' }
+    ].forEach(({ sel, trig }) => {
+        const cards = document.querySelectorAll(sel);
+        if (cards.length && document.querySelector(trig)) {
+            cards.forEach(card => {
+                gsap.fromTo(card,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                        scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
                     }
-                }
-            );
+                );
+            });
         }
     });
 }
 
 function initCountUp() {
-    const counters = document.querySelectorAll('.stat-number[data-target]');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const target = parseInt(el.dataset.target);
-                animateCounter(el, target);
-                observer.unobserve(el);
-            }
-        });
-    }, { threshold: 0.5 });
-    counters.forEach(c => observer.observe(c));
+    document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(el, parseInt(el.dataset.target));
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(el);
+    });
 }
 
 function animateCounter(el, target) {
-    const duration = 2000;
-    const start = performance.now();
-    function update(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        el.textContent = Math.floor(eased * target).toLocaleString();
-        if (progress < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
+    const duration = 2000, start = performance.now();
+    (function update(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const e = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
+        el.textContent = Math.floor(e * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(update);
+    })(start);
 }
 
 function initFAQ() {
