@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand Public | 리뉴얼 프로토타입</title>
+    <title>Brand Public | 리뉴얼 프로토타입 v2</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,24 +16,36 @@
             justify-content: center;
             padding: 40px 24px;
         }
-        .wrapper { max-width: 900px; width: 100%; text-align: center; }
-        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
-        .subtitle { color: #666; font-size: 1rem; margin-bottom: 48px; }
+        .wrapper { max-width: 1100px; width: 100%; text-align: center; }
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; letter-spacing: -0.02em; }
+        .subtitle { color: #666; font-size: 1rem; margin-bottom: 16px; }
+        .version-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff5600, #0F766E);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 48px;
+            letter-spacing: 0.05em;
+        }
         .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         .card {
             background: #fff;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0,0,0,0.06);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
             color: inherit;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
         .card-preview {
-            height: 220px;
+            height: 240px;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid #eee;
         }
         .card-preview iframe {
             width: 200%;
@@ -43,61 +55,80 @@
             transform-origin: top left;
             pointer-events: none;
         }
-        .card-preview-01 { background: #000; }
-        .card-preview-02 { background: #FFF9F0; }
-        .card-body { padding: 28px 24px; }
-        .card-num {
-            font-size: 0.8rem;
+        .card-info { padding: 24px; text-align: left; }
+        .card-info h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+        .card-info .card-desc { color: #888; font-size: 0.875rem; line-height: 1.5; }
+        .card-tag {
+            display: inline-block;
+            font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            letter-spacing: 0.03em;
+        }
+        .card-tag.orange { background: #fff4ed; color: #ff5600; }
+        .card-tag.teal { background: #ccfbf1; color: #0F766E; }
+
+        .old-versions {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid #e5e5e5;
+        }
+        .old-versions h3 { font-size: 1rem; color: #999; margin-bottom: 16px; font-weight: 500; }
+        .old-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .old-links a {
             color: #999;
-            margin-bottom: 8px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            padding: 8px 20px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
-        .card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
-        .card-desc { font-size: 0.9rem; color: #666; line-height: 1.7; margin-bottom: 20px; }
-        .card-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #4A7CF7;
-        }
-        .card-btn::after { content: '→'; transition: transform 0.3s; }
-        .card:hover .card-btn::after { transform: translateX(4px); }
-        @media (max-width: 640px) {
+        .old-links a:hover { color: #333; border-color: #ccc; }
+
+        @media (max-width: 700px) {
             .cards { grid-template-columns: 1fr; }
-            h1 { font-size: 1.6rem; }
+            h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
     <div class="wrapper">
         <h1>Brand Public</h1>
-        <p class="subtitle">리뉴얼 프로토타입 시안 2종</p>
+        <p class="subtitle">마케팅 에이전시 웹사이트 리뉴얼 프로토타입</p>
+        <span class="version-badge">v2 — PREMIUM REDESIGN</span>
+
         <div class="cards">
-            <a href="prototype-01/" class="card">
-                <div class="card-preview card-preview-01">
-                    <iframe src="prototype-01/" loading="lazy"></iframe>
+            <a href="prototype-01-v2/" class="card">
+                <div class="card-preview">
+                    <iframe src="prototype-01-v2/" loading="lazy"></iframe>
                 </div>
-                <div class="card-body">
-                    <div class="card-num">PROTOTYPE 01</div>
-                    <h2 class="card-title">Editorial Minimal</h2>
-                    <p class="card-desc">influencerkr 기반 에디토리얼 미니멀 스타일. 모노톤, 네거티브 스페이스, 그라데이션 포인트.</p>
-                    <span class="card-btn">시안 보기</span>
-                </div>
-            </a>
-            <a href="prototype-02/" class="card">
-                <div class="card-preview card-preview-02">
-                    <iframe src="prototype-02/" loading="lazy"></iframe>
-                </div>
-                <div class="card-body">
-                    <div class="card-num">PROTOTYPE 02</div>
-                    <h2 class="card-title">Warm B2B</h2>
-                    <p class="card-desc">ourcompany 기반 친근한 B2B 스타일. 파스텔, 라운드, 페인포인트 말풍선 카드.</p>
-                    <span class="card-btn">시안 보기</span>
+                <div class="card-info">
+                    <span class="card-tag orange">시안 01</span>
+                    <h2>Sharp Editorial</h2>
+                    <p class="card-desc">인터콤 스타일 기반. 날카로운 기하학, 네거티브 트래킹, Fin Orange 악센트. 에디토리얼 매거진 느낌.</p>
                 </div>
             </a>
+            <a href="prototype-02-v2/" class="card">
+                <div class="card-preview">
+                    <iframe src="prototype-02-v2/" loading="lazy"></iframe>
+                </div>
+                <div class="card-info">
+                    <span class="card-tag teal">시안 02</span>
+                    <h2>Warm Professional</h2>
+                    <p class="card-desc">인터콤 + 스트라이프 하이브리드. 라운드 지오메트리, 틸 악센트, 블루 틴트 섀도우. 따뜻한 B2B.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="old-versions">
+            <h3>이전 버전 (v1)</h3>
+            <div class="old-links">
+                <a href="prototype-01/">v1 시안 01 — Editorial Minimal</a>
+                <a href="prototype-02/">v1 시안 02 — Warm B2B</a>
+            </div>
         </div>
     </div>
 </body>
