@@ -1190,6 +1190,111 @@ button {
 
 
 /* ========================================
+   RESPONSIVE — Small Mobile (max-width: 420px)
+   ======================================== */
+@media (max-width: 420px) {
+  .hero__container {
+    padding: 40px 16px 32px;
+  }
+
+  .hero__title {
+    font-size: 28px;
+  }
+
+  .hero__badge {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .stat__number {
+    font-size: 32px;
+  }
+
+  .stat__suffix {
+    font-size: 24px;
+  }
+
+  .stat {
+    padding: 24px 16px;
+  }
+
+  .about,
+  .services,
+  .diff,
+  .reviews,
+  .process,
+  .faq {
+    padding: 56px 0;
+  }
+
+  .about-card,
+  .service-card,
+  .review-card {
+    padding: 24px 20px;
+  }
+
+  .diff-card {
+    padding: 32px 20px 28px;
+  }
+
+  .cta {
+    padding: 72px 0;
+  }
+
+  .cta__title {
+    font-size: 24px;
+  }
+
+  .cta__desc {
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .btn--large {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .footer__nav {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer__top {
+    gap: 32px;
+  }
+
+  .faq-item__question {
+    font-size: 14px;
+  }
+
+  .faq-item__answer {
+    font-size: 14px;
+  }
+}
+
+
+/* ========================================
    REDUCED MOTION
    ======================================== */
 @media (prefers-reduced-motion: reduce) {
@@ -1215,11 +1320,11 @@ button {
   opacity: 0;
   transform: translateY(40px);
 }
-.about__cards .card,
-.services__grid .card,
-.diff__points .diff__point,
-.reviews__grid .card,
-.process__steps .process__step {
+.about__grid .about-card,
+.services__grid .service-card,
+.diff__grid .diff-card,
+.reviews__grid .review-card,
+.process__timeline .process-step {
   opacity: 0;
   transform: translateY(30px);
 }
