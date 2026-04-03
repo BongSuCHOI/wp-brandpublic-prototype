@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Public | 리뉴얼 프로토타입</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+        }
+        .wrapper { max-width: 900px; width: 100%; text-align: center; }
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
+        .subtitle { color: #666; font-size: 1rem; margin-bottom: 48px; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .card-preview {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-preview iframe {
+            width: 200%;
+            height: 200%;
+            border: none;
+            transform: scale(0.5);
+            transform-origin: top left;
+            pointer-events: none;
+        }
+        .card-preview-01 { background: #000; }
+        .card-preview-02 { background: #FFF9F0; }
+        .card-body { padding: 28px 24px; }
+        .card-num {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        .card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
+        .card-desc { font-size: 0.9rem; color: #666; line-height: 1.7; margin-bottom: 20px; }
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4A7CF7;
+        }
+        .card-btn::after { content: '→'; transition: transform 0.3s; }
+        .card:hover .card-btn::after { transform: translateX(4px); }
+        @media (max-width: 640px) {
+            .cards { grid-template-columns: 1fr; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Brand Public</h1>
+        <p class="subtitle">리뉴얼 프로토타입 시안 2종</p>
+        <div class="cards">
+            <a href="prototype-01/" class="card">
+                <div class="card-preview card-preview-01">
+                    <iframe src="prototype-01/" loading="lazy"></iframe>
+                </div>
+                <div class="card-body">
+                    <div class="card-num">PROTOTYPE 01</div>
+                    <h2 class="card-title">Editorial Minimal</h2>
+                    <p class="card-desc">influencerkr 기반 에디토리얼 미니멀 스타일. 모노톤, 네거티브 스페이스, 그라데이션 포인트.</p>
+                    <span class="card-btn">시안 보기</span>
+                </div>
+            </a>
+            <a href="prototype-02/" class="card">
+                <div class="card-preview card-preview-02">
+                    <iframe src="prototype-02/" loading="lazy"></iframe>
+                </div>
+                <div class="card-body">
+                    <div class="card-num">PROTOTYPE 02</div>
+                    <h2 class="card-title">Warm B2B</h2>
+                    <p class="card-desc">ourcompany 기반 친근한 B2B 스타일. 파스텔, 라운드, 페인포인트 말풍선 카드.</p>
+                    <span class="card-btn">시안 보기</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
