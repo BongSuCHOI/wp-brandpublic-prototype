@@ -1,5 +1,3 @@
-/* Brand Public 시안 02 - 메인 스크립트 */
-
 document.addEventListener('DOMContentLoaded', () => {
     initNav();
     initScrollAnimations();
@@ -11,16 +9,13 @@ function initNav() {
     const nav = document.getElementById('nav');
     const toggle = document.getElementById('navToggle');
     const menu = document.getElementById('navMenu');
-
     window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 50);
     });
-
     toggle.addEventListener('click', () => {
         toggle.classList.toggle('active');
         menu.classList.toggle('active');
     });
-
     menu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             toggle.classList.remove('active');
@@ -32,7 +27,9 @@ function initNav() {
 function initScrollAnimations() {
     gsap.registerPlugin(ScrollTrigger);
 
-    const fadeElements = document.querySelectorAll('.fade-up');
+    const excludeSelectors = '.service-card, .diff-card, .review-card, .process-step, .faq-item, .stat-card, .pain-card, .about-feature';
+    const fadeElements = document.querySelectorAll('.fade-up:not(' + excludeSelectors + ')');
+    
     fadeElements.forEach((el) => {
         gsap.to(el, {
             opacity: 1,
@@ -41,7 +38,7 @@ function initScrollAnimations() {
             ease: 'power2.out',
             scrollTrigger: {
                 trigger: el,
-                start: 'top 85%',
+                start: 'top 88%',
                 toggleActions: 'play none none none'
             }
         });
@@ -61,18 +58,21 @@ function initScrollAnimations() {
     cardGroups.forEach(({ selector, trigger }) => {
         const cards = document.querySelectorAll(selector);
         if (cards.length) {
-            gsap.to(cards, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                stagger: 0.08,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: trigger,
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
+            gsap.fromTo(cards, 
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.08,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: trigger,
+                        start: 'top 82%',
+                        toggleActions: 'play none none none'
+                    }
                 }
-            });
+            );
         }
     });
 }
