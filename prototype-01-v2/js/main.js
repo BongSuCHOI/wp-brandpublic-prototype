@@ -122,6 +122,7 @@
   var fadeElements = document.querySelectorAll('.fade-up');
 
   fadeElements.forEach(function (el) {
+    if (el.closest('.about__cards, .services__grid, .diff__points, .reviews__grid, .process__steps')) return;
     gsap.fromTo(el,
       { opacity: 0, y: 40 },
       {

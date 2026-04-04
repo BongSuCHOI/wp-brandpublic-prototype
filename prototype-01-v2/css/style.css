@@ -1036,16 +1036,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    ANIMATIONS (fade-up class — used by GSAP)
    ================================================================ */
 /* Note: opacity set by GSAP fromTo() — NOT in CSS to prevent
-   invisible content when GSAP CDN fails to load. */
+  invisible content when GSAP CDN fails to load. */
 .fade-up {
-  transform: translateY(24px);
-  transition: opacity var(--duration-slow) var(--ease-out),
-              transform var(--duration-slow) var(--ease-out);
-}
-
-.fade-up.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* ================================================================

@@ -270,14 +270,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Note: opacity/transform set by GSAP fromTo() — NOT in CSS to prevent
    invisible content when GSAP CDN fails to load. */
 .fade-up {
-  transform: translateY(28px);
-  transition: opacity var(--duration-slower) var(--ease-out),
-              transform var(--duration-slower) var(--ease-out);
-}
-
-.fade-up.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 
