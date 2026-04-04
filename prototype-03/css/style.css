@@ -1019,6 +1019,39 @@ button {
   }
 }
 
+/* 2xl: 1536px */
+@media (min-width: 1536px) {
+  .hero__container,
+  .social-proof__container,
+  .services__container,
+  .how-it-works__container,
+  .portfolio__container,
+  .testimonials__container,
+  .final-cta__container {
+    max-width: var(--max-width-page);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-7xl);
+  }
+
+  .social-proof__number {
+    font-size: var(--font-size-5xl);
+  }
+
+  .services__grid {
+    gap: var(--space-8);
+  }
+
+  .portfolio__grid {
+    gap: var(--space-8);
+  }
+
+  .testimonials__grid {
+    gap: var(--space-8);
+  }
+}
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
   *,
