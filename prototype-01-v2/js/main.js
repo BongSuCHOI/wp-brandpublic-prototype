@@ -101,6 +101,23 @@
     gsap.registerPlugin(ScrollTrigger);
   }
 
+  /* ---------- Set initial hidden state via JS (not CSS) ----------
+     Prevents "jump" on elements already in viewport: they start in
+     the "from" state immediately, so fromTo() never needs to flash. */
+  gsap.set('.fade-up', { opacity: 0, y: 40 });
+
+  /* Also set staggered card elements to their initial state */
+  var cardGroupsSelector = [
+    '.about__cards .card',
+    '.services__grid .card',
+    '.diff__points .diff__point',
+    '.reviews__grid .card',
+    '.process__steps .process__step'
+  ];
+  cardGroupsSelector.forEach(function (sel) {
+    gsap.set(sel, { opacity: 0, y: 30 });
+  });
+
   /* ---------- Fade-up Animations ---------- */
   var fadeElements = document.querySelectorAll('.fade-up');
 

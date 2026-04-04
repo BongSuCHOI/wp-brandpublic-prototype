@@ -30,9 +30,13 @@
   /* ---------- Register GSAP Plugin ---------- */
   gsap.registerPlugin(ScrollTrigger);
 
+  /* ---------- Set initial hidden state via JS (not CSS) ----------
+     Prevents "jump" on elements already in viewport: they start in
+     the "from" state immediately, so fromTo() never needs to flash.
+     Safe because we already exited above if GSAP is undefined. */
+  gsap.set('.fade-up', { opacity: 0, y: 30 });
+
   /* ---------- Fade-Up Animations ---------- */
-  /* Initial state set by fromTo(), NOT by CSS or gsap.set().
-     This prevents invisible content if GSAP partially fails. */
 
   /* Hero elements - staggered reveal */
   const heroFadeUps = document.querySelectorAll('.hero .fade-up');
