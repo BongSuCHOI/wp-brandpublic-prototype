@@ -17,15 +17,22 @@
     return;
   }
 
+  /* ---------- GSAP Load Check ---------- */
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    /* GSAP CDN failed — make all content visible immediately */
+    document.querySelectorAll('.fade-up').forEach(function (el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    return;
+  }
+
   /* ---------- Register GSAP Plugin ---------- */
   gsap.registerPlugin(ScrollTrigger);
 
   /* ---------- Fade-Up Animations ---------- */
-  const fadeUpElements = document.querySelectorAll('.fade-up');
-
-  fadeUpElements.forEach(function (el) {
-    gsap.set(el, { opacity: 0, y: 30 });
-  });
+  /* Initial state set by fromTo(), NOT by CSS or gsap.set().
+     This prevents invisible content if GSAP partially fails. */
 
   /* Hero elements - staggered reveal */
   const heroFadeUps = document.querySelectorAll('.hero .fade-up');
